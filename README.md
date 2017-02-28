@@ -7,6 +7,7 @@ Requirements:<br />
   -<a href="http://opencv.org/">OpenCV for Python3</a><br />
   -<a href="https://www.apache.org/">Apache2 http-server</a><br />
   -<a href="https://www.tensorflow.org">Tensorflow</a><br />
+  -<a href="https://github.com/vysheng/tg.git">telegram-cli</a></br>
   -<a href="http://www.numpy.org/">Numpy</a><br />
   -<a href="https://www.keras.io">Keras</a> <br />
   
