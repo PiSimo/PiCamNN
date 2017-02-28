@@ -1,4 +1,4 @@
-# PiCam
+# PiCamNN
 Survelliance system with deep learning based pedestrain detection (<a href="https://www.github.com/allanzelener/YAD2K">YAD2K</a> <a href="https://pjreddie.com/darknet/yolo/">YOLO</a> implementation ), and notification with Telegram.
 <p>The program is made of two different threads, one is always looking for movements and if there are some it's also writing the frames to video-file.The other thread get the frames in which were detected movements and then with a deep neural network (<a href="https://arxiv.org/abs/1612.08242#">YOLO</a>) is searching for persons, and if there are some it's sending the images to you with telegram.</p>
 <p>Thi code has been tested on raspberry pi 3B with whom I got 2/3s per frame (if you run it on GPU you should reach 200frames per second), with previous versions of the raspberry pi you probably will not get good perormances :'( .</p>
@@ -18,16 +18,16 @@ Requirements:<br />
   <h1>Instructions for <a href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian</a>:</h1>
   
   Follow those instructions after having installed all the requirements!
- <br/> <code>git clone https://github.com/PiSimo/PiCam.git</code>
- <br/> <code>cd PiCam</code>
+ <br/> <code>git clone https://github.com/PiSimo/PiCamNN.git</code>
+ <br/> <code>cd PiCamNN</code>
  <p>Download the tiny yolo weights converted with <a href="https://www.github.com/allanzelener/YAD2K">YAD2k</a> :</p>
   <code>wget https://www.dropbox.com/s/rw1fa9tz2yoge0j/tiny.h5?dl=0 -O tiny.h5</code>
  <br/> <code>sudo mv index.html /var/www/html/</code><br />
  (NOTE: If you aren't on raspbian apache's base folder might not be /var/www/html/ so check before!)<br /><br />
- <p>Before starting the main script modify in picam.py some main variables:</p>
+ <p>Before starting the main script you might change in picam.py some variables:</p>
  <p><code>maxDays = 7</code> If you have stored more then maxDays videos on your devices the oldest one will be removed</p>
  <p><code>baseFolder = "/var/www/html/" </code> Change this variable if your apache hasn't created that folder </p>
- <p><code>scriptFolder = "/home/pi/PiCam/"</code> Change this variable with the path to the PiCam folder </p>
+ <p><code>scriptFolder = "/home/pi/PiCamNN/"</code> Change this variable with the path which contains the scripts and the weights </p>
  <p><code>num_cam = -1</code> Number of cam to use (-1 means open the first one the system has read)</p>
  <p><code>frame_check = 17 </code> Number of empty frames to wait before killing the main process</p>
  <p><code>time_chunck = 15 </code> Seconds to wait before considering a new action</p>
@@ -37,4 +37,4 @@ Requirements:<br />
 <p>To run your code :</p>
 <p><code>sudo python3 picam.py</code></p>
 <p>After the main loop is started,every time a person get detected by the neural net you will recive the photo on <I>telegram</I> (on the chat with yourself).</p>
-<p>To see the recorded videos, from your local network you have to go with your browser on the ip of your device which is running <i>PiCam</i> and from that page you will be able to download all the videos (eg. "http://192.168.0.17").</p>
+<p>To see the recorded videos, from your local network you have to go with your browser on the ip of your device which is running <i>PiCamNN</i> and from that page you will be able to download all the videos (eg. "http://192.168.0.17").</p>
