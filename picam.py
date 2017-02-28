@@ -16,7 +16,7 @@ from yad2k.models.keras_yolo import yolo_eval, yolo_head
 #USER SETTINGS :
 maxDays = 7                      #The recorded videos will be destroyed after "maxDays" days
 baseFolder = "/var/www/html/"    #Apache's base folder
-scriptFolder = "/home/pi/picamnn/" #The folder which contains main script (picam.py)
+scriptFolder = "/home/pi/PiCamNN/" #The folder which contains main script (picam.py)
 num_cam = -1       #Number of the camera (if -1 it will be the first camera read by the system)
 frame_check = 17   #Frames to check before quit
 time_chunck = 15   #Time to consider for a new action
@@ -46,12 +46,12 @@ def printExit(out):
 
 #Updating index.html
 def handleFile(name):
-    print("[PiCam] Updating file...")
+    print("[PiCamNN] Updating file...")
     f = open(baseFolder+"index.html","r")
     cont = f.read()
     f.close()
     if cont.find(name) != -1:
-        print("[PiCam] File has been update yet !")
+        print("[PiCamNN] File has been update yet !")
         return False
     f = open(baseFolder+"index.html","w")
     lines = cont.split("\n")
@@ -72,15 +72,15 @@ def handleFile(name):
                 rm = rm[0:rm.find("\"")]
                 try:
                     system("rm {}".format(baseFolder+rm))
-                    print("[PiCam] Old file removed.")
+                    print("[PiCamNN] Old file removed.")
                 except:
-                    print("[PiCam] An error occured while removing old file!")
+                    print("[PiCamNN] An error occured while removing old file!")
         elif go:
             day +=1
             if day <= maxDays:f.write("{}\n".format(lines[i]))
         else:f.write("{}\n".format(lines[i]))
     f.close()
-    print("[PiCam] index.html UPDATED")
+    print("[PiCamNN] index.html UPDATED")
     return True
 #
 def movement(mat_1,mat_2):
