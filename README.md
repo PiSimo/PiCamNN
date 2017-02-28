@@ -4,12 +4,14 @@ Survelliance system with deep learning based pedestrain detection (<a href="http
 
 Requirements:<br />
   -Linux (tested on raspberry pi3 with raspbian)<br />
+  -Python3
   -<a href="http://opencv.org/">OpenCV for Python3</a><br />
   -<a href="https://www.apache.org/">Apache2 http-server</a> (remember to enable the apache process eg "#systemctl enable apache2;reboot")<br />
   -<a href="https://www.tensorflow.org">Tensorflow</a><br />
   -<a href="https://github.com/vysheng/tg.git">telegram-cli</a>(follow the installation instructions and log in with your account)</br> 
   -<a href="http://www.numpy.org/">Numpy</a><br />
   -<a href="https://www.keras.io">Keras</a> <br />
+  -<a href="http://www.h5py.org/">h5py</a> <br />
   
   <h1>Instructions for <a href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian</a>:</h1>
   
@@ -30,5 +32,5 @@ Requirements:<br />
 <br />
 <p>To run your code :</p>
 <p><code>sudo python3 picam.py</code></p>
-<p>After the main loop is started,every time a person get detected by the neural net you will recive the photo on telegram (on the chat with yourself).</p>
-<p>To see the recorded videos, from your local network you have to go with your browser on the ip of your device which is running PiCam and from there you will be able to download the videos (eg. "http://192.168.0.17")</p>
+<p>After the main loop is started,every time a person get detected by the neural net you will recive the photo on <I>telegram</I> (on the chat with yourself).</p>
+<p>To see the recorded videos, from your local network you have to go with your browser on the ip of your device which is running <i>PiCam</i> and from that page you will be able to download all the videos (eg. "http://192.168.0.17").</p>
