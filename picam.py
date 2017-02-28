@@ -18,8 +18,8 @@ from yad2k.models.keras_yolo import yolo_eval, yolo_head
 w = 0 #width
 h = 0 #height
 maxDays = 7#MaxDays
-baseFolder = "/var/www/html/"
-scriptFolder = "/home/pi/picam/"
+baseFolder = "/var/www/html/" #Apache's base folder
+scriptFolder = "/home/pi/picam/" #The folder which contains picam.py
 num_cam = -1 #Number of the camera
 frame_check = 17 #Frames to check before quit
 time_chunck = 15 #Time to consider for a new action
