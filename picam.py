@@ -138,7 +138,7 @@ def yoloThread():
                         writ = False
                         xs,ys = [],[]
                         for i, c in reversed(list(enumerate(out_classes))):
-                            if c == 14:
+                            if c == 14: #14 is the label for persons
                                 writ = True
                                 box = out_boxes[i]
                                 top, left, bottom, right = box
@@ -152,12 +152,8 @@ def yoloThread():
                                 ys.append(top+i)
                                 ys.append(bottom-i)
                         if writ:
-                            minX = min(xs)
-                            minY = min(ys)
-                            maxX = max(xs)
-                            maxY = max(ys)
                             img_name = scriptFolder+"imgs/{}.png".format(num)
-                            cv2.imwrite(img_name,mat[minY:maxY,minX:maxX])
+                            cv2.imwrite(img_name,mat[min(ys):max(ys),min(xs):max(xs)]) #we only save the part of the images where we have found persons
                             out_s = "[{}] Detected person (taken {}s)!\n".format(time.strftime("%H:%M:%S"),round(time.time()-times[0]))
                             print(out_s)
                             flog.write(out_s)
