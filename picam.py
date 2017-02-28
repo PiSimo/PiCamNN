@@ -15,15 +15,18 @@ from yad2k.models.keras_yolo import yolo_eval, yolo_head
 '''
 ---# GLOBAL VARIABLES #---
 '''
+#USER SETTINGS :
+maxDays = 7                      #The recorded videos will be destroyed after "maxDays" days
+baseFolder = "/var/www/html/"    #Apache's base folder
+scriptFolder = "/home/pi/picam/" #The folder which contains main script (picam.py)
+num_cam = -1       #Number of the camera (if -1 it will be the first camera read by the system)
+frame_check = 17   #Frames to check before quit
+time_chunck = 15   #Time to consider for a new action
+telegram_user = "" #Your telegram user name so all the images will be sent to your telegram char with yourself
+
+#IMAGES VARIABLES:
 w = 0 #width
 h = 0 #height
-maxDays = 7#MaxDays
-baseFolder = "/var/www/html/" #Apache's base folder
-scriptFolder = "/home/pi/picam/" #The folder which contains picam.py
-num_cam = -1 #Number of the camera
-frame_check = 17 #Frames to check before quit
-time_chunck = 15 #Time to consider for a new action
-telegram_user = "" #Your telegram user name
 #Image processing vars:
 blur1 = 2
 blur2 = 1
@@ -95,8 +98,8 @@ def movement(mat_1,mat_2):
     mat_2_gray     = cv2.erode(mat_2_gray,np.ones((erodeval,erodeval)))
     mat_2_gray     = cv2.dilate(mat_2_gray,np.ones((4,4)))
     _, contours,__ = cv2.findContours(mat_2_gray,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    if len(contours) > 0:return True
-    return  False
+    if len(contours) > 0:return True #If there were any movements
+    return  False                    #if not
 
 def yoloThread():
     global frames,times
@@ -252,7 +255,7 @@ if __name__ == "__main__":
                     frames.append(b.copy())
                     times.append(time.time())
                 frc += 1
-                cv2.putText(b,name.replace("_"," ")+" "+time.strftime("%H:%M:%S"),(50,h - 50),cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255))
+                cv2.putText(b,name.replace("_"," ")+" "+time.strftime("%H:%M:%S"),(50,h - 50),cv2.FONT_HERSHEY_SIMPLEX, 2,(255,255,255))
                 writer.write(cv2.resize(b,(w,h)))
 
             if time.strftime("%d") != day:
