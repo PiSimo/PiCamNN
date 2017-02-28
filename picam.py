@@ -23,7 +23,7 @@ scriptFolder = "/home/pi/picam/"
 num_cam = -1 #Number of the camera
 frame_check = 17 #Frames to check before quit
 time_chunck = 15 #Time to consider for a new action
-telegram_user = "PiSimo"
+telegram_user = "" #Your telegram user name
 #Image processing vars:
 blur1 = 2
 blur2 = 1
