@@ -112,7 +112,7 @@ def yoloThread():
     print("[PiCam] Loading yolo model ({})...".format(scriptFolder+"tiny.h5"))
     yolo_model = load_model(model_path)
     num_anchors = len(anchors)
-    print('{} model, anchors, and classes loaded.'.format(model_path))
+    print('[PiCam] YOLO model loaded !'.format(model_path))
 
     model_image_size = yolo_model.layers[0].input_shape[1:3]
     yolo_outputs = yolo_head(yolo_model.output, anchors, 20)
