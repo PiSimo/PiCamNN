@@ -1,12 +1,10 @@
 #!/usr/bin/python3.4
 
 import time
-import random
 import threading
 import cv2
 import numpy as np
 from sys import exit
-from os  import path
 from os  import system
 from keras import backend as K
 from keras.models import load_model
@@ -18,7 +16,7 @@ from yad2k.models.keras_yolo import yolo_eval, yolo_head
 #USER SETTINGS :
 maxDays = 7                      #The recorded videos will be destroyed after "maxDays" days
 baseFolder = "/var/www/html/"    #Apache's base folder
-scriptFolder = "/home/pi/picam/" #The folder which contains main script (picam.py)
+scriptFolder = "/home/pi/picamnn/" #The folder which contains main script (picam.py)
 num_cam = -1       #Number of the camera (if -1 it will be the first camera read by the system)
 frame_check = 17   #Frames to check before quit
 time_chunck = 15   #Time to consider for a new action
