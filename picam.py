@@ -143,7 +143,7 @@ def yoloThread():
                                 left = max(0, np.floor(left + 0.5).astype('int32'))
                                 bottom = min(mat.shape[1], np.floor(bottom + 0.5).astype('int32'))
                                 right = min(mat.shape[0], np.floor(right + 0.5).astype('int32'))
-                                cv2.rectangle(mat,(left+i,top+i),(right-i,bottom-i),(10,230,10),1)
+                                #  cv2.rectangle(mat,(left+i,top+i),(right-i,bottom-i),(10,230,10),1)
                                 xs.append(left+i)
                                 xs.append(right-i)
                                 ys.append(top+i)
