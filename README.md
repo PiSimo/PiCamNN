@@ -20,6 +20,7 @@ Requirements:<br />
   Follow those instructions after having installed all the requirements!
  <br/> <code>git clone https://github.com/PiSimo/PiCamNN.git</code>
  <br/> <code>cd PiCamNN</code>
+ <br/> <code>mkdir imgs</code>
  <p>Download the tiny yolo weights converted with <a href="https://www.github.com/allanzelener/YAD2K">YAD2k</a> :</p>
   <code>wget https://www.dropbox.com/s/rw1fa9tz2yoge0j/tiny.h5?dl=0 -O tiny.h5</code>
  <br/> <code>sudo mv index.html /var/www/html/</code><br />
