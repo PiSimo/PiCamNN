@@ -18,6 +18,8 @@ Requirements:<br />
   Follow those instructions after having installed all the requirements!
  <br/> <code>git clone https://github.com/PiSimo/PiCam.git</code>
  <br/> <code>cd PiCam</code>
+ <p>Download the tiny yolo weights converted with <a href="https://www.github.com/allanzelener/YAD2K">YAD2k</a> :</p>
+ <br /><code>wget https://www.dropbox.com/s/rw1fa9tz2yoge0j/tiny.h5?dl=0 -O tiny.h5</code>
  <br/> <code>sudo mv index.html /var/www/html/</code><br />
  (NOTE: If you aren't on raspbian apache's base folder might not be /var/www/html/ so check before!)<br /><br />
  <p>Before starting the main script modify in picam.py some main variables:</p>
