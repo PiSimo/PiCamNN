@@ -4,7 +4,7 @@ Survelliance system with deep learning based pedestrain detection (<a href="http
 
 Requirements:<br />
   -Linux (tested on raspberry pi3 with raspbian)<br />
-  -Python3
+  -Python3<br/>
   -<a href="http://opencv.org/">OpenCV for Python3</a><br />
   -<a href="https://www.apache.org/">Apache2 http-server</a> (remember to enable the apache process eg "#systemctl enable apache2;reboot")<br />
   -<a href="https://www.tensorflow.org">Tensorflow</a><br />
