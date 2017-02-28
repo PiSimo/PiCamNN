@@ -4,7 +4,7 @@ Survelliance system with deep learning based pedestrain detection (<a href="http
 <p>Thi code has been tested on raspberry pi 3B with whom I got 2/3s per frame (if you run it on GPU you should reach 200frames per second), with previous versions of the raspberry pi you probably will not get good perormances :'( .</p>
 <hr></hr>
 
-Requirements:<br />
+<h1>Requirements:</h1>
   -Linux (tested on raspberry pi3 with raspbian)<br />
   -Python3<br/>
   -<a href="http://opencv.org/">OpenCV for Python3</a><br />
@@ -35,7 +35,7 @@ Requirements:<br />
  <p><code>telegram_user = ""</code> Your Telegram username you will se all the images on the chat with yourself</p>
 
 <br />
-<p>To run your code :</p>
+<h1>To run your code :</h1>
 <p><code>sudo python3 picam.py</code></p>
 <p>After the main loop is started,every time a person get detected by the neural net you will recive the photo on <I>telegram</I> (on the chat with yourself).</p>
 <p>To see the recorded videos, from your local network you have to go with your browser on the ip of your device which is running <i>PiCamNN</i> and from that page you will be able to download all the videos (eg. "http://192.168.0.17").</p>
