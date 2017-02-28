@@ -1,0 +1,117 @@
+<html>
+<meta charset="utf-8">
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<title>PiCam</title>
+
+<!--
+  Modify this file as much as you want, but don't modify
+  the part from <!-- S -->  to <!-- E --> else picam will
+  not work !
+-->
+
+<style>
+body{
+  background-color: #673ab7;
+  font-family: 'Ubuntu','Monospace','Sanserif';
+}
+.pos{
+  width:100%;
+  height:100px;
+}
+a{
+  text-decoration: none;
+  color:#000;
+}
+
+.top{
+  width: 100%;
+  position: absolute;
+  margin-left: -10;
+  margin-right: -10;
+  margin-top: -10;
+  height:100;
+  background-color: #e51c23;
+  box-shadow: 5px 5px 10px #000;
+  color: #fff;
+  text-shadow: 4px 4px 3px #000;
+  font-size: 17px;
+  transition-duration: 1s;
+
+}
+.top:hover{
+  box-shadow: 4px 4px 50px #610B0B;
+}
+#corp{
+  margin-top: 25px;
+  /*width: 400px;
+  */height: 400px;
+
+  margin-left: 20%;
+}
+#logs{
+  font-size: 21px;
+  font-weight: bold;
+  transition-duration: 1s;
+  text-shadow: 0px 3px 10px #000;
+}
+#logs:hover{
+  text-shadow: 0px 1px 10px #fff;
+}
+
+#title{
+<  color:#000;
+  text-shadow: 0px 3px 10px #000;
+  font-weight: bold;
+  font-size: 20px;
+
+}
+#f{
+  border-style: dashed;
+  width:110%;
+  margin-left:-20%;
+  color: #009688;
+}
+.file{
+  color:#000;
+  transition-duration: 1s;
+  margin-left: 25;
+
+}
+.file:hover{
+  text-shadow: 0px 1px 10px #fff;
+  transform: scale(1.5,1.5);
+}
+
+</style>
+<body>
+<div class="pos">
+<div class="top">
+  <center><h1>PiCam</h1></center>
+</div>
+</div>
+
+<div id="corp">
+<a id="logs" href="logs">Detection Logs ></a>
+
+<br /><br />
+<hr id="f"/>
+<p id="title">Video :</p>
+<!-- S -->
+
+ <!-- E -->
+</div>
+<script>
+a = document.getElementsByClassName("file");
+for(var i = 0;i != a.length;i++){
+	x = a[i].innerHTML;
+	x = x.replace("__","_");
+	while(x.indexOf("_") != -1)
+	{
+		x = x.replace("_"," ");
+	}
+	x = "> "+x;
+	a[i].innerHTML = x;
+}
+</script>
+</body>
+</html>
