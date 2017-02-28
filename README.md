@@ -1,5 +1,5 @@
 # PiCam
-Survelliance system with deep learning based pedestrain detection (<a href="https://pjreddie.com/darknet/yolo/">YOLO</a>  <a href="https://www.github.com/allanzelener/YAD2K">YAD2K</a>)
+Survelliance system with deep learning based pedestrain detection (<a href="https://www.github.com/allanzelener/YAD2K">YAD2K</a> <a href="https://pjreddie.com/darknet/yolo/"></a> implementation )
 <hr></hr>
 
 Requirements:<br />
