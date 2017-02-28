@@ -17,5 +17,5 @@ Requirements:<br />
  <br/> <code>git clone https://github.com/PiSimo/PiCam.git</code>
  <br/> <code>cd PiCam</code>
  <br/> <code>sudo mv index.html /var/www/html/</code><br />
- (NOTE: If you aren't on raspbian apache's base folder might no be /var/www/html/ so check before!)
+ (NOTE: If you aren't on raspbian apache's base folder might not be /var/www/html/ so check before!)
  
