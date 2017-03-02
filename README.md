@@ -1,7 +1,7 @@
 # PiCamNN
 Survelliance system with deep learning based pedestrain detection (<a href="https://www.github.com/allanzelener/YAD2K">YAD2K</a> <a href="https://pjreddie.com/darknet/yolo/">YOLO</a> implementation ), and notification with Telegram.
 <p>The program is made of two different threads, one is always looking for movements and if there are some it's also writing the frames to video-file.The other thread get the frames in which were detected movements and then with a deep neural network (<a href="https://arxiv.org/abs/1612.08242#">YOLO</a>) is searching for persons, and if there are some it's sending the images to you with telegram.</p>
-<p>Thi code has been tested on raspberry pi 3B with whom I got 2/3s per frame (if you run it on GPU you should reach 200frames per second), with previous versions of the raspberry pi you probably will not get good perormances :'( .</p>
+<p>The code has been tested on raspberry pi 3B with whom I got 2/3s per frame (if you run it on GPU you should reach 200frames per second), with previous versions of the raspberry pi you probably will not get good perormances :'( .</p>
 <hr></hr>
 
 <h1>Requirements:</h1>
