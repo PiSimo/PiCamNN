@@ -25,7 +25,7 @@ Survelliance system with deep learning based pedestrain detection (<a href="http
   <code>wget https://www.dropbox.com/s/rw1fa9tz2yoge0j/tiny.h5?dl=0 -O tiny.h5</code>
  <br/> <code>sudo mv index.html /var/www/html/</code><br />
  (NOTE: If you aren't on raspbian apache's base folder might not be /var/www/html/ so check before!)<br /><br />
- <p>Before starting the main script you might change in picam.py some variables:</p>
+ <p>Before starting the main script you should change in picam.py some variables:</p>
  <p><code>maxDays = 7</code> If you have stored more then maxDays videos on your devices the oldest one will be removed</p>
  <p><code>baseFolder = "/var/www/html/" </code> Change this variable if your apache hasn't created that folder </p>
  <p><code>scriptFolder = "/home/pi/PiCamNN/"</code> Change this variable with the path which contains the scripts and the weights </p>
@@ -39,3 +39,4 @@ Survelliance system with deep learning based pedestrain detection (<a href="http
 <p><code>sudo python3 picam.py</code></p>
 <p>After the main loop is started,every time a person get detected by the neural net you will recive the photo on <I>telegram</I> (on the chat with yourself).</p>
 <p>To see the recorded videos, from your local network you have to go with your browser on the ip of your device which is running <i>PiCamNN</i> and from that page you will be able to download all the videos (eg. "http://192.168.0.17").</p>
+M
