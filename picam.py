@@ -44,7 +44,11 @@ def printExit(out):
     print(out,"\nClosing....!")
     exit(-1)
 
-#Updating index.html
+#Updating index.html :
+#       1 Opening index.html
+#       2 Adding new link for the new video
+#       3 If there are more then maxDays links removing oldest one
+#       4 Removing also the oldest video
 def handleFile(name):
     print("[PiCamNN] Updating file...")
     f = open(baseFolder+"index.html","r")
@@ -82,7 +86,8 @@ def handleFile(name):
     f.close()
     print("[PiCamNN] index.html UPDATED")
     return True
-#
+
+# Some morphological operations on two input frames to check for movements
 def movement(mat_1,mat_2):
     mat_1_gray     = cv2.cvtColor(mat_1.copy(),cv2.COLOR_BGR2GRAY)
     mat_1_gray     = cv2.blur(mat_1_gray,(blur1,blur1))
@@ -99,24 +104,25 @@ def movement(mat_1,mat_2):
     if len(contours) > 0:return True #If there were any movements
     return  False                    #if not
 
+
+#Pedestrian Recognition Thread
 def yoloThread():
     global frames,times
-    model_path =   scriptFolder+"tiny.h5"
-    anchors_path = scriptFolder+"anchors.txt"
-    sess = K.get_session()
+    model_path =   scriptFolder+"tiny.h5"     #Model weights
+    sess = K.get_session()                    
     print("[PiCam] Loading anchors file...")
-    anchors = [1.08,1.19,3.42,4.41,6.63,11.38,9.42,5.11,16.62,10.52]
+    anchors = [1.08,1.19,3.42,4.41,6.63,11.38,9.42,5.11,16.62,10.52] #Tiny Yolo anchors' values 
     anchors = np.array(anchors).reshape(-1, 2)
     print("[PiCam] Loading yolo model ({})...".format(scriptFolder+"tiny.h5"))
-    yolo_model = load_model(model_path)
-    num_anchors = len(anchors)
+    yolo_model = load_model(model_path)  #Loading Tiny YOLO
+    num_anchors = len(anchors)      
     print('[PiCam] YOLO model loaded !'.format(model_path))
 
-    model_image_size = yolo_model.layers[0].input_shape[1:3]
-    yolo_outputs = yolo_head(yolo_model.output, anchors, 20)
+    model_image_size = yolo_model.layers[0].input_shape[1:3] #Get input shape
+    yolo_outputs = yolo_head(yolo_model.output, anchors, 20) 
     input_image_shape = K.placeholder(shape=(2, ))
     boxes, scores, classes = yolo_eval(yolo_outputs,input_image_shape,score_threshold=0.3,iou_threshold=0.4)
-    num = 0 #Photo name
+    num = 0 #Starting Photo's name
     old_time = 0.0 #Latest time
 
     print("[PiCam] YOLO Thread started!")
@@ -124,17 +130,18 @@ def yoloThread():
     while True:
         if len(frames) != 0:
             try:
-                cv2.waitKey(17)
-                mat = frames[0]
+                cv2.waitKey(17) 
+                mat = frames[0] #Get First frame with movements
                 mat = cv2.resize(mat,(model_image_size[0],model_image_size[1]))
                 in_mat = np.array(mat,dtype='float32')
-                in_mat /= 255.
+                in_mat /= 255.  #Removing mean
                 in_mat = np.expand_dims(in_mat, 0)
                 if (times[0] - old_time) > time_chunck:
+                    #Searching for detection:
                     out_boxes, out_scores, out_classes = sess.run([boxes, scores, classes],feed_dict={yolo_model.input: in_mat,input_image_shape: [mat.shape[1], mat.shape[0]],K.learning_phase(): 0})
                     if len(out_boxes) > 0:
                         writ = False
-                        xs,ys = [],[]
+                        xs,ys = [],[]  #X's and Y's coordinate
                         for i, c in reversed(list(enumerate(out_classes))):
                             if c == 14: #14 is the label for persons
                                 writ = True
@@ -144,29 +151,27 @@ def yoloThread():
                                 left = max(0, np.floor(left + 0.5).astype('int32'))
                                 bottom = min(mat.shape[1], np.floor(bottom + 0.5).astype('int32'))
                                 right = min(mat.shape[0], np.floor(right + 0.5).astype('int32'))
-                                #  cv2.rectangle(mat,(left+i,top+i),(right-i,bottom-i),(10,230,10),1)
                                 xs.append(left+i)
                                 xs.append(right-i)
                                 ys.append(top+i)
                                 ys.append(bottom-i)
                         if writ:
                             img_name = scriptFolder+"imgs/{}.png".format(num)
-                            cv2.imwrite(img_name,mat[min(ys):max(ys),min(xs):max(xs)]) #we only save the part of the images where we have found persons
-                            out_s = "[{}] Detected person (taken {}s)!\n".format(time.strftime("%H:%M:%S"),round(time.time()-times[0]))
+                            cv2.imwrite(img_name,mat[min(ys):max(ys),min(xs):max(xs)]) #Only saving the rectangle in which persons' got detected
+                            out_s = "[{}] Detected person (taken {}s)!\n".format(time.strftime("%H:%M:%S"),round(time.time()-times[0])) #Log output
                             print(out_s)
                             flog.write(out_s)
                             flog.flush()
-                            #system("telegram-cli -W -e \"send_photo {} {} \"".format(telegram_user,img_name))
-                            try:
+                            try: #Preventig Problems like no connection
                                 system("telegram-cli -W -e \"send_photo {} {} \"".format(telegram_user,img_name))
                             except Exception as exc:
                                 print("[PiCam] Some error occured in YOLO Thread ({}) :".format(time.strftime("%H:%M:%S")),exc)
                             num += 1
-                            old_time = times[0]
+                            old_time = times[0] #Updating detection time
             except Exception as ex:
                 print("[PiCam] Some error occured in YOLO Thread ({}) :".format(time.strftime("%H:%M:%S")),ex)
-            del times[0]
-            del frames[0]
+            del times[0]   #Deleting first Detection time
+            del frames[0]  #Deleting first Frame
         cv2.waitKey(50)
 
 '''
@@ -179,7 +184,7 @@ if __name__ == "__main__":
 #Camera Input
     cap = None
     try:
-        cap = cv2.VideoCapture(num_cam)
+        cap = cv2.VideoCapture(num_cam) #Trying to open camera
         _,dim = cap.read()
         if not _ or dim.shape == (0,0,0) :
             printExit("[PiCam] Error occured when opening the camera stream!")
@@ -191,20 +196,12 @@ if __name__ == "__main__":
 #Video Output
     writer = None
     err = "[PiCam] Error occured when opening the output video stream!"
-    #if True:
     load = handleFile(name) #Updating web_file
     if not load:system("mv {}.avi {}_.avi".format(baseFolder+name,baseFolder+name))
     writer = cv2.VideoWriter(baseFolder+name+".avi", cv2.VideoWriter_fourcc(*"MJPG"), 21,(w,h), True)
     if not writer.isOpened():
-        printExit(err)
-
-    yoloThread = threading.Thread(target=yoloThread)
-    #yoloThread.daemon = True #When the main script end the daemon get killed
-    print("[PiCam] Starting Yolo Thread....")
-    yoloThread.start()
-#except:
-#        printExit(err)
-#File ops:
+        printExit(err) #If output Stream is unavailable
+#Loading video file of the same day:
     if not load:
         try:
             print("[PiCam] Loading old video File...",end="")
@@ -220,9 +217,12 @@ if __name__ == "__main__":
             print("loaded!")
         except:
             print("\n[PiCam] Couldn't load old file skipping...!")
-        system("rm {}_.avi".format(baseFolder+name))
-
-
+        system("rm {}_.avi".format(baseFolder+name)) #Removing old video file
+        
+#Starting Yolo thread
+    yoloThread = threading.Thread(target=yoloThread)
+    print("[PiCam] Starting Yolo Thread....")
+    yoloThread.start()
 
 
     day = time.strftime("%d") #startin' day
@@ -233,6 +233,7 @@ if __name__ == "__main__":
         try:
             _,a = cap.read()
             if a.shape == (0,0,0):
+                #If Frame was empty trying frame_check times and then breaking program
                 for i in range(frame_check):
                     _,a = cap.read()
                     if a.shape != (0,0,0):break
@@ -242,25 +243,25 @@ if __name__ == "__main__":
             _,b = cap.read()
             move = movement(a,b)
 
-            #if we got a movement
+            #if we have got a movement
             if move:
                 print("[PiCam] Movement ({})".format(time.strftime("%H:%M:%S")))
-                if frc % 2 == 0:
-                    frames.append(b.copy())
-                    times.append(time.time())
-                frc += 1
+                if frc % 2 == 0:   #Only each two frames with movement are passed to YOLO Thread
+                    frames.append(b.copy())  #Frame with movement
+                    times.append(time.time())#Detection Time
+                frc += 1 #FrameCount +1
                 cv2.putText(b,name.replace("_"," ")+" "+time.strftime("%H:%M:%S"),(50,h - 50),cv2.FONT_HERSHEY_SIMPLEX, 2,(255,255,255))
-                writer.write(cv2.resize(b,(w,h)))
+                writer.write(cv2.resize(b,(w,h))) #Adding to File
 
             if time.strftime("%d") != day:
-                writer.release()
-                frc = 0
+                writer.release() #Closing old video output
+                frc = 0          
                 print("[PiCam] Cleaning imgs dir...")
                 system("rm {}".format(scriptFolder+"imgs/*"))
                 #Handling FLOG:
                 flog.close()
-                system("echo '### PiCam Live Logs###' > {}".format(baseFolder+"logs"))
-                flog = open(baseFolder+"logs","a")
+                system("echo '### PiCam Live Logs###' > {}".format(baseFolder+"logs")) #Cleaning Logs file
+                flog = open(baseFolder+"logs","a") 
                 #FLOG end
                 print("[PiCam] New day! Restarting video output....")
                 name = time.strftime("%c").replace(" ","_")[0:10]
