@@ -12,8 +12,7 @@ Survelliance system with deep learning based pedestrain detection (<a href="http
   -<a href="https://www.tensorflow.org">Tensorflow</a> (<a href="https://github.com/samjabrahams/tensorflow-on-raspberry-pi"> link</a> For Tensorflow on raspberry Pi)<br />
   -<a href="https://github.com/vysheng/tg.git">telegram-cli</a>(follow the installation instructions and log in with your account)</br> 
   -<a href="http://www.numpy.org/">Numpy</a><br />
-  -<a href="https://www.keras.io">Keras</a> <br />
-  -<a href="http://www.h5py.org/">h5py</a> <br />
+  -<a href="https://www.keras.io">Keras 2</a> <br />
   
   <h1>Instructions for <a href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian</a>:</h1>
   
@@ -21,8 +20,8 @@ Survelliance system with deep learning based pedestrain detection (<a href="http
  <br/> <code>git clone https://github.com/PiSimo/PiCamNN.git</code>
  <br/> <code>cd PiCamNN</code>
  <br/> <code>mkdir imgs</code>
- <p>Download the tiny yolo weights converted with <a href="https://www.github.com/allanzelener/YAD2K">YAD2k</a> :</p>
-  <code>wget https://www.dropbox.com/s/rw1fa9tz2yoge0j/tiny.h5?dl=0 -O tiny.h5</code>
+ <p>Download the tiny yolo weights(for keras 2) converted with <a href="https://www.github.com/allanzelener/YAD2K">YAD2k</a> :</p>
+  <code>wget https://www.dropbox.com/s/xastcd4c0dv2kty/tiny.h5?dl=0 -O tiny.h5</code>
  <br/> <code>sudo mv index.html /var/www/html/</code><br />
  (NOTE: If you aren't on raspbian apache's base folder might not be /var/www/html/ so check before!)<br /><br />
  <p>Before starting the main script you should change in picam.py some variables:</p>
