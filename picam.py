@@ -4,6 +4,7 @@ import time
 import threading
 import cv2
 import numpy as np
+import subprocess
 from sys import exit
 from os  import system
 from keras import backend as K
@@ -162,8 +163,8 @@ def yoloThread():
                             print(out_s)
                             flog.write(out_s)
                             flog.flush()
-                            try: #Preventig Problems like no connection
-                                system("telegram-cli -W -e \"send_photo {} {} \"".format(telegram_user,img_name))
+                            try: #Preventig Problems like no connection #I've used subprocess to set a timeout
+                                subprocess.call("telegram-cli -W -e \'send_photo {} {} \' "format(telegram_user,img_name),timeout=30,shell=True)
                             except Exception as exc:
                                 print("[PiCam] Some error occured in YOLO Thread ({}) :".format(time.strftime("%H:%M:%S")),exc)
                             num += 1
