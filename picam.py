@@ -164,7 +164,7 @@ def yoloThread():
                             flog.write(out_s)
                             flog.flush()
                             try: #Preventig Problems like no connection #I've used subprocess to set a timeout
-                                subprocess.call("telegram-cli -W -e \'send_photo {} {} \' "format(telegram_user,img_name),timeout=30,shell=True)
+                                subprocess.call("telegram-cli -W -e \'send_photo {} {} \' ".format(telegram_user,img_name),timeout=30,shell=True)
                             except Exception as exc:
                                 print("[PiCam] Some error occured in YOLO Thread ({}) :".format(time.strftime("%H:%M:%S")),exc)
                             num += 1
