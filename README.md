@@ -36,6 +36,6 @@ Survelliance system with deep learning based pedestrain detection (<a href="http
 <br />
 <h1>To run the code :</h1>
 <p><code>sudo python3 picam.py</code></p>
-<p>After the main loop is started,every time a person get detected by the neural net you will recive the photo on <I>telegram</I> (on the chat with yourself).</p>
+<p>After the main loop is started,every time a person get detected by the neural net you will receive the photo on <I>telegram</I> (on the chat with yourself).</p>
 <p>To see the recorded videos, from your local network you have to go with your browser on the ip of your device which is running <i>PiCamNN</i> and from that page you will be able to download all the videos (eg. http://192.168.0.17 ).</p>
 
