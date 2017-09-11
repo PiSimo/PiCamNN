@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
+import cv2
 import time
 import threading
-import cv2
-import numpy as np
 import subprocess
+import numpy as np
 from sys import exit
 from os  import system
 from keras import backend as K
