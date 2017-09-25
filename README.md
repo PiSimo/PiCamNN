@@ -10,7 +10,7 @@ Survelliance system with deep learning based people detection (<a href="https://
   -<a href="http://opencv.org/">OpenCV for Python3</a><br />
   -<a href="https://www.apache.org/">Apache2 http-server</a> (remember to enable the apache process eg "#systemctl enable apache2;reboot")<br />
   -<a href="https://www.tensorflow.org">Tensorflow</a> (<a href="https://github.com/samjabrahams/tensorflow-on-raspberry-pi"> link</a> For Tensorflow on raspberry Pi)<br />
-  -<a href="https://github.com/vysheng/tg.git">telegram-cli</a>(follow the installation instructions and log in with your account)</br> 
+  -<a href="https://github.com/vysheng/tg">telegram-cli</a>(follow the installation instructions and log in with your account)</br> 
   -<a href="http://www.numpy.org/">Numpy</a><br />
   -<a href="https://www.keras.io">Keras 2</a> <br />
   
